@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Pong Game</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="loadingScreen">
+    <h1>🏓 Professional Pong</h1>
+    <p>Loading...</p>
+</div>
+
+<div id="mainMenu" class="hidden">
+    <h1>🏓 PROFESSIONAL PONG</h1>
+
+    <button id="playBtn">▶ Play Game</button>
+    <button id="settingsBtn">⚙ Settings</button>
+    <button id="highscoreBtn">🏆 High Scores</button>
+    <button id="aboutBtn">ℹ About</button>
+</div>
+
+<div id="hud" class="hidden">
+    <div id="leftScore">0</div>
+
+    <div id="centerInfo">
+        <span id="level">LEVEL 1</span>
+    </div>
+
+    <div id="rightScore">0</div>
+</div>
+
+<canvas id="gameCanvas"></canvas>
+
+<div id="pauseMenu" class="hidden">
+    <h2>Game Paused</h2>
+
+    <button id="resumeBtn">
+        Resume
+    </button>
+
+    <button id="restartBtn">
+        Restart
+    </button>
+
+    <button id="menuBtn">
+        Main Menu
+    </button>
+</div>
+
+<div id="gameOver" class="hidden">
+    <h1>GAME OVER</h1>
+
+    <h2 id="finalScore">
+        Score : 0
+    </h2>
+
+    <button id="playAgainBtn">
+        Play Again
+    </button>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
