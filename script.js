@@ -112,3 +112,148 @@ function updateBall() {
         ball.speedX *= -1;
     }
 }
+// ======================================
+// SCRIPT.JS - PART 2
+// Drawing + Score + Reset
+// ======================================
+
+function drawBackground() {
+ctx.fillStyle = "#050505";
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+ctx.strokeStyle = "#00ffff";  
+ctx.lineWidth = 4;  
+
+for (let i = 0; i < canvas.height; i += 30) {  
+    ctx.beginPath();  
+    ctx.moveTo(canvas.width / 2, i);  
+    ctx.lineTo(canvas.width / 2, i + 15);  
+    ctx.stroke();  
+}
+
+}
+
+function drawPaddle(x, y, w, h, color) {
+ctx.fillStyle = color;
+ctx.shadowBlur = 20;
+ctx.shadowColor = color;
+ctx.fillRect(x, y, w, h);
+ctx.shadowBlur = 0;
+}
+
+function drawBall() {
+ctx.beginPath();
+ctx.fillStyle = "#ffffff";
+ctx.shadowBlur = 25;
+ctx.shadowColor = "#00ffff";
+ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+ctx.fill();
+ctx.closePath();
+ctx.shadowBlur = 0;
+}
+
+function drawScore() {
+ctx.fillStyle = "white";
+ctx.font = "50px Arial";
+ctx.textAlign = "center";
+
+ctx.fillText(  
+    game.scoreLeft,  
+    canvas.width / 2 - 80,  
+    60  
+);  
+
+ctx.fillText(  
+    game.scoreRight,  
+    canvas.width / 2 + 80,  
+    60  
+);
+
+}
+
+function resetBall() {
+ball.x = canvas.width / 2;
+ball.y = canvas.height / 2;
+
+ball.speedX = Math.random() > 0.5 ? 7 : -7;  
+ball.speedY = (Math.random() * 6) - 3;
+
+}
+
+function checkScore() {
+
+if (ball.x < 0) {  
+
+    game.scoreRight++;  
+
+    resetBall();  
+
+}  
+
+if (ball.x > canvas.width) {  
+
+    game.scoreLeft++;  
+
+    resetBall();  
+
+}  
+
+if (game.scoreLeft >= 10) {  
+
+    alert("PLAYER WINS!");  
+
+    game.scoreLeft = 0;  
+
+    game.scoreRight = 0;  
+
+}  
+
+if (game.scoreRight >= 10) {  
+
+    alert("AI WINS!");  
+
+    game.scoreLeft = 0;  
+
+    game.scoreRight = 0;  
+
+}
+
+}
+
+function gameLoop() {
+
+updatePlayer();  
+
+updateAI();  
+
+updateBall();  
+
+checkScore();  
+
+drawBackground();  
+
+drawPaddle(  
+    player.x,  
+    player.y,  
+    player.width,  
+    player.height,  
+    "#00ffff"  
+);  
+
+drawPaddle(  
+    ai.x,  
+    ai.y,  
+    ai.width,  
+    ai.height,  
+    "#ff0066"  
+);  
+
+drawBall();  
+
+drawScore();  
+
+requestAnimationFrame(gameLoop);
+
+}
+
+gameLoop();
